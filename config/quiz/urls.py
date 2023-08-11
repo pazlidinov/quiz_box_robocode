@@ -3,15 +3,24 @@ from . import views
 
 app_name = 'quiz'
 
-urlpatterns = [    
+urlpatterns = [
     path("", views.HomePageView.as_view(), name='home'),
-    path('add_lead_user/', views.addLeadUser, name='add_lead_user'),
-    path('question/', views.question, name='question'),
-    path('nex_question/', views.next_question, name='nex_question'),
-    
-    
-    path('access_phonenumber/', views.access_phonenumber, name='access_phonenumber'),    
-    path('change_phonenumber/<int:phonenumber>', views.change_phonenumber, name='change_phonenumber'),
-    path('repeat_access_password/', views.repeat_access_password, name='repeat_access_password'),
-    path('check_phone_number/', views.check_phone_number, name='check_phone_number'),
+
+    path('add_lead_user/', views.AddLeadUser.as_view(), name='add_lead_user'),
+    path('access_phonenumber/', views.AccessPhonenumber.as_view(),
+         name='access_phonenumber'),
+
+    path('check_phone_number/', views.check_phone_number,
+         name='check_phone_number'),
+    path('access_phonenumber/check_phone_number/',
+         views.check_phone_number, name='check_phone_number'),
+
+    path('repeat_send/', views.repeat_send, name='repeat_send'),
+    path('change_phonenumber/', views.change_phonenumber,
+         name='change_phonenumber'),
+
+    path('start_question/<slug:slug>/<int:order>/',
+         views.StartQuestion.as_view(), name='start_question'),
+    path('result/', views.Result.as_view(), name='result'),
+    path('user_actived/', views.user_actived, name='user_actived'),
 ]

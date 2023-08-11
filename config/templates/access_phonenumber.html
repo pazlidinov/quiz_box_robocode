@@ -4,33 +4,64 @@
 {% block content %}
 <div class="container center-screen">
     <div class="card text-center mt-3 shadow border w-70" style="width: 350px;">
-        <form action="{% url 'quiz:access_phonenumber' %}" method="post">
-            {% csrf_token %}
-            <div class="card-header h5 text-white bg-primary">Telefon raqamni tasdiqlash</div>
-            <div class="card-body px-5">
-                {% if sms %}
+
+        <div class="card-header h5 text-white bg-primary">Telefon raqamni tasdiqlash</div>
+        <div class="card-body px-5">
+            <form action="{% url 'quiz:access_phonenumber' %}" method="post">
+                {% csrf_token %}
+                {% if answer %}
                 <p class="card-text py-2">
-                <h4><b>{{phone_number}}</b></h4> raqamingizga yuborilgan tasdiqlash kodini kiriting
+                <h4><b>{{phone}}</b></h4> raqamingizga yuborilgan tasdiqlash kodini kiriting
                 </p>
-                <div class="form-outline">                   
-                    <input type="text" name="access_code" id="text" class="form-control my-3" placeholder="Yuborilgan kodni kirirting" />
+                <div class="form-outline">
+                    <h1 id="watch" class="h4 mx-2 my-3 text-primary"><span id="minutes"></span>:<span
+                            id="seconds"></span></h1>
+                    <input type="text" name="access_code" id="text" class="form-control my-3"
+                        placeholder="Yuborilgan kodni kirirting" />
                 </div>
                 <button type="submit" class="btn btn-primary w-100 mt-2">Tasdiqlash</button>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Raqamni almashtirish</a>
+                    <a href="{% url 'quiz:repeat_send' %}" id="repeat_send" style="display: none;">Qayta yuborish</a>
+                </div>
                 {% else %}
                 <p class="card-text py-2">
-                <h4><b>{{phone_number}}</b></h4> raqam tarmoqda mavjud emas, iltimos, boshqa raqam kiritng
+                <h4><b>{{phone}}</b></h4> raqam tarmoqda mavjud emas, iltimos, boshqa raqam kiritng
                 </p>
-                {% endif %}
                 <div class="d-flex justify-content-between mt-4">
-                    <a class="access" href="{% url 'quiz:change_phonenumber' phone_number %}">Raqamni almashtirish</a>
-                    {% if sms %}
-                    <a class="" href="{% url 'quiz:repeat_access_password' %}">Qayta yuborish</a>
-                    {% endif %}
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal">Raqamni almashtirish</a>
                 </div>
-            </div>
-        </form>
+                {% endif %}
+            </form>
+        </div>
+
     </div>
 
 </div>
+
+
+<div class="modal fade login-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button class="cross" data-bs-dismiss="modal" aria-label="Close"><img src="assets/icons/cross.svg"
+                    alt=""></button>
+            <h1>
+                Yangi telefon raqamini kiriting
+            </h1>
+
+            <form action="{% url 'quiz:change_phonenumber' %}" method="get">
+                {% csrf_token %}
+                <span class="is_checked"></span>
+                <input type="number" id="phone" name="new_phonenumber" placeholder="XX1234567" onkeyup="NewNumber()">
+                <button type="submit" class="button-light sign-in-btn new_phonenumber">
+                    Yuborish
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{% static 'assets/js/access_phonenumber.js' %}"></script>
 
 {% endblock content %}

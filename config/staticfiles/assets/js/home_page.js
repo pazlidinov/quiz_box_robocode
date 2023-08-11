@@ -102,7 +102,7 @@ function User_Location() {
 }
 
 setInterval(function () {
-    let send_button = document.getElementsByName('form_send')[0]    
+    let send_button = document.getElementsByName('form_send')[0]
     if (full_name_completed && phone_number_completed && age_completed && User_Location_completed) {
         send_button.removeAttribute('disabled');
     }

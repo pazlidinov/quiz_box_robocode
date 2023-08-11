@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-between align-items-center mt-5">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="text-center h4">{{title}} #{{question.order}}</h4>
+                        <h4 class="text-center h4">{{quiz.title}} #{{question.order}}</h4>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
@@ -20,11 +20,11 @@
 
             <div class="d-flex justify-content-center align-items-center my-5">
                 <div class="answer_list">
-                    <h4 class="text-center fw-bold h4" name="{{question.order}}" >{{question.label.html|safe}}</h4>
+                    <h4 class="text-center fw-bold h4" name="{{question.order}}">{{question.label.html|safe}}</h4>
                     {% if question.image %}
-                    <img src="{{question.image.url}}" class="img-fluid"c>
+                    <img src="{{question.image.url}}" class="img-fluid" c>
                     {% endif %}
-                    {% for answer in answers %}
+                    {% for answer in answers.all %}
                     <div class="d-flex justify-content-start px-2 gap-2" id="{{answer.id}}">
                         <button class="answer "><i></i><span class="fw-bolder"></span></button>
                         <p class="w-75 fw-bolder p">{{answer.text}}</p>
@@ -36,28 +36,21 @@
             <div class="d-flex align-items-center justify-content-between progress_wrapper">
                 <div class="d-flex align-items-center progress_bar_wrapper">
                     <div id="progress">
-                        <span id="progress_bar" style="width: {{proggress}}%"></span>
+                        <span id="progress_bar" style="width:{{progress}}%;"></span>
                     </div>
-                    <span class="px-2">{{question.order}}/{{question_count}}</span>
+                    <span class="px-2">{{question.order}}/{{quiz.question_count}}</span>
                 </div>
 
-                <form action="{% url 'quiz:nex_question' %}" method="post">
+                <form action="{% url 'quiz:start_question' quiz.slug question.order %}" method="get">
                     {% csrf_token %}
-                    <input type="text" name="question" value="{{question.order}}" class="form-control d-none">
-                       
-
                     <input type="text" name="answer" id="true_answer" class="form-control d-none">
-                       
+                    <input type="text" name="clock" id="clock" value="{{quiz.times_taken}}" class="form-control d-none">
 
-                    <input type="text" name="clock" id="clock" value="{{clock}}" class="form-control d-none">
-                     
-                    <input type="text" name="password" id="password" value="{{password}}" class="form-control d-none">
-                      
-
-                    <button type="submit" class="button-success  mx-2 d-none-btn d-flex justify-content-end mb-4"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">Davom etish
-                    </button>
-
+                    <a href="">
+                        <button type="submit" class="button-success  mx-2 d-none-btn d-flex justify-content-end mb-4">
+                            Davom etish
+                        </button>
+                    </a>
                 </form>
             </div>
 
