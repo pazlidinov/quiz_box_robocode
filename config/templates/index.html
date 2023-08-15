@@ -12,7 +12,7 @@
                     15 daqiqa vaqtingizni sarflab IT da qaysi kasb siz uchun mos kelishini <br> bilib oling</p>
 
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'quiz:question' %}"><button class="button-light mx-2">Kasb
+                <a href=""><button class="button-light mx-2">Kasb
                         tanlash</button></a>
 
                 {% else %}
@@ -34,7 +34,7 @@
         </div>
 
         <div class="tests-content">
-            {% for object in object_list %}
+            {% for object in object_list|slice:8 %}
             <a href="" class="card" data-aos="zoom-in">
                 <img src="{{ object.image.url }}" alt="">
 

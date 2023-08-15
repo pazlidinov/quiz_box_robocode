@@ -28,7 +28,7 @@
                     <a href="/" class="navbar-brand"><img src="{% static 'assets/images/Logo.svg' %}" alt=""></a>
                     <div class=" btn-wrapper">
                         {% if request.user.is_authenticated %}
-                        <a href="{% url 'quiz:question' %}"><button class="button-light mx-2">Kasb tanlash</button></a>
+                        <a href=""><button class="button-light mx-2">Kasb tanlash</button></a>
                         {% else %}
                         <button class="button-light mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal1">Kasb
                             tanlash</button>
