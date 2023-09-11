@@ -9,7 +9,7 @@
         <div class="quiz-info_wrapper">
             <div class="mt-5 content">
                 <h2>Tugadi !</h2>
-                <p>Sizga Front End dasturchi kasbi <span class="text-warning">{{result}}% </span>mos keladi.</p>
+                <p>Sizga {{quiz.title}} savollarga <span class="text-warning">{{result}}% </span>mos keladi.</p>
             </div>
             <div class="content2">
                 <p class="mt-4">
@@ -31,11 +31,15 @@
                 </p>
 
             </div>
+            {% if request.user.is_authenticated %}
+            <a href="/"><button class="button-light mb-4  mt-4">Accountga qaytish</button></a>
+            {% else %}
             <button onclick="user_actived()" class="button-light mb-4  mt-4" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Bepul
                 sinov
                 darsiga
                 yozilish</button>
+            {% endif %}
         </div>
     </div>
     <div class="modal fade login-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

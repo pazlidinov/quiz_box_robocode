@@ -17,14 +17,14 @@ class QuizAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    pass
+    list_display =['id','label','order','quiz']
 
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'text', 'is_correct']
+    list_display = ['id', 'text', 'is_correct','question']
 
 
 @admin.register(CorrectAnswer)
 class CorrectAnswerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'author', 'correctly_answer']
+    list_display = ['id', 'author', 'user', 'correctly_answer']

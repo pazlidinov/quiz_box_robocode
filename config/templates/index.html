@@ -35,7 +35,7 @@
 
         <div class="tests-content">
             {% for object in object_list|slice:8 %}
-            <a href="" class="card" data-aos="zoom-in">
+            <a href="{% url 'quiz:start_question' object.slug 0 %}" class="card" data-aos="zoom-in">
                 <img src="{{ object.image.url }}" alt="">
 
                 <h3 class="fw-bold">{{object.title}}</h3>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="list">
-                <!-- {% for item in object_list %}
+                <!-- {% for item in object_list|slice:11 %}
                 <li>
                     <p class="name">{{item.author}}</p>
                     <p class="programming-language">{{item.quiz}}</p>
@@ -96,7 +96,6 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -104,7 +103,7 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
+
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -112,7 +111,7 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
+
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -120,7 +119,7 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
+
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -128,7 +127,7 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
+
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -136,7 +135,7 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
+
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -144,7 +143,6 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -152,7 +150,6 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -160,7 +157,6 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -168,7 +164,6 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
                 </li>
                 <li>
                     <p class="number">1</p>
@@ -176,7 +171,6 @@
                     <p> Muhammediyorov</p>
                     <p class="programming-language">Python</p>
                     <p class="points">30/27</p>
-                    <p class="time">23min</p>
                 </li>
             </div>
         </div>
@@ -198,7 +192,7 @@
 
             <p>Administratsiya tomonidan berilgan login <br> hamda paroldan foydalaning.</p>
 
-            <form action="/register/login/" method="post">
+            <form action="{% url 'quiz:login' %}" method="post">
                 {% csrf_token %}
                 <input type="text" name="username" placeholder="Login">
                 <input type="password" name="password" placeholder="Parol">

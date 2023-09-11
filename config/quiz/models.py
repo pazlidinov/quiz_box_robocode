@@ -1,6 +1,6 @@
 from django.db import models
 from django_quill.fields import QuillField
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 INTEREST = (
@@ -40,6 +40,10 @@ class LeadUser(models.Model):
     def new_date_time(self, new_date_time):
         self.date_time = new_date_time
         self.save()
+        
+    def user_active(self):
+        self.active = True
+        self.save()
 
     def __str__(self):
         return str(self.full_name)
@@ -55,7 +59,7 @@ class Quiz(models.Model):
 
     @property
     def question_count(self):
-        ''' Method to get num of Qs for this quiz, used in Serializer'''
+        ''' Method to get num of Qs for this quiz, used in Serializer'''        
         return self.questions.count()
 
     class Meta:
@@ -68,7 +72,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     label = QuillField()
-    order = models.PositiveIntegerField(blank=True, null=True, unique=True)
+    order = models.PositiveIntegerField(blank=True, null=True)
     point = models.FloatField(default=3.3)
     image = models.ImageField(
         upload_to='question_image/', blank=True, null=True)
@@ -79,7 +83,7 @@ class Question(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return str(self.label)
+        return str(self.quiz)+str(self.order)
 
 
 class Answer(models.Model):
@@ -89,12 +93,14 @@ class Answer(models.Model):
         Question, on_delete=models.CASCADE, related_name='answers')
 
     def __str__(self):
-        return str(self.text)
+        return str(self.text)+str(self.question)
 
 
 class CorrectAnswer(models.Model):
     author = models.ForeignKey(
-        LeadUser, on_delete=models.CASCADE, related_name='corect_answer')
+        LeadUser, on_delete=models.CASCADE, related_name='lead_answers', blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name='user_answers', blank=True, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT,
                              related_name='correct_quiz', blank=True, null=True)
     correctly_answer = models.PositiveIntegerField(
@@ -103,10 +109,11 @@ class CorrectAnswer(models.Model):
     class Meta:
         ordering = ['-id']
 
-    @property
-    def plus_correct_answer(self):
-        self.correctly_answer = self.correctly_answer+1
-        self.save()
+    def high_result(self, last_result):
+        if self.correctly_answer<last_result:
+            self.correctly_answer = last_result
+            self.save()
 
     def __str__(self):
         return str(self.author)
+models.ManyToManyField

@@ -7,37 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
-    
+
     <title>Document</title>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <div class="container">
-                <nav class="navbar navbar-light bg-none mt-2">
-                    <div class="container-fluid">
-                        <a href="/" class="navbar-brand"><img src="{% static 'assets/images/Logo.svg' %}" alt=""></a>
-                        <div class=" btn-wrapper">
-                            {% if request.user.is_authenticated %}
-                            <a href="{% url 'quiz_box:quiz' %}"><button class="button-light mx-2">Kasb
-                                    tanlash</button></a>
-                            {% else %}
-                            <button class="button-light mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal1">Kasb
-                                tanlash</button>
-                            {% endif %}
-                            <a href="#">
-                                <button class="button-dark mx-2 d-none-btn" data-bs-toggle="modal" data-bs-target="#">Kirish
-                                    test</button>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+
+            <nav class="navbar navbar-light bg-none mt-2">
+
+                <a href="/" class="navbar-brand"><img src="{% static 'assets/images/Logo.svg' %}" alt="#"></a>
+                <div class=" btn-wrapper">
+                    <a href="{% url 'quiz:logout' %}">
+                        <button class="button-dark mx-2 d-none-btn" data-bs-toggle="modal" data-bs-target="#">
+                            Log out</button>
+                    </a>
+                </div>
+
+            </nav>
+
         </header>
         <main class="main-profile">
             <div class="main-wrapper">
-                <h3 class="user_name">Abdulloh Abdullayev</h3>
+                <h3 class="user_name">{{request.user.username}}</h3>
                 <div class=" d-flex align-items-center justify-content-between gap-3 profile-cards_one_wrapper">
                     <div class="card card__1" style="width: 251px;">
                         <div class="card-body p-0">
@@ -48,8 +41,9 @@
                                 </div>
                             </div>
                             <div class="ball">
-                                <h2>18</h2>
-                                <h6 class="ball2 fw-bold">2 <span class=" text-muted fs-6 fw-normal">Completed</span>
+                                <h2>{{quiz_count}}</h2>
+                                <h6 class="ball2 fw-bold">{{corectly_count}} <span
+                                        class=" text-muted fs-6 fw-normal">Completed</span>
                                 </h6>
                             </div>
                         </div>
@@ -64,8 +58,9 @@
                                 </div>
                             </div>
                             <div class="ball">
-                                <h2>132</h2>
-                                <h6 class="ball2 fw-bold">28 <span class=" text-muted fs-6 fw-normal">Completed</span>
+                                <h2>{{question_quiz_count}}</h2>
+                                <h6 class="ball2 fw-bold">{{corectly_answer_count}} <span
+                                        class=" text-muted fs-6 fw-normal">Completed</span>
                                 </h6>
                             </div>
                         </div>
@@ -80,9 +75,10 @@
                                 </div>
                             </div>
                             <div class="ball">
-                                <h2>11</h2>
-                                <h6 class="ball2 fw-bold">1 <span class=" text-muted fs-6 fw-normal">Completed</span>
-                                </h6>
+                                <h2>{{mistake}}</h2>
+                                <br>
+                                <!-- <h6 class="ball2 fw-bold"><span class=" text-muted fs-6 fw-normal"></span>
+                                </h6> -->
                             </div>
                         </div>
                     </div>
@@ -96,9 +92,10 @@
                                 </div>
                             </div>
                             <div class="ball">
-                                <h2>76%</h2>
-                                <h6 class="ball2 fw-bold text-success">5% <span
-                                        class=" text-muted fs-6 fw-normal">Completed</span></h6>
+                                <h2>{{increase}}%</h2>
+                                <br>
+                                <!-- <h6 class="ball2 fw-bold text-success"><span class=" text-muted fs-6 fw-normal"></span>
+                                </h6> -->
                             </div>
                         </div>
                     </div>
@@ -107,45 +104,18 @@
 
                 <div
                     class="d-flex align-items-center justify-content-between flex-wrap gap-1 profile-cards_one_wrapper">
+                    {% for quiz in others_quiz %}
                     <a href="./quiz.html" class="card card__1">
                         <div class="card-body p-0 d-inline-flex flex-column align-items-center gap-2">
                             <div class="html_icon">
-                                <img class="html_icon_1" src="{% static 'assets/images/html5-original-wordmark.png' %}" alt="">
+                                <img class="html_icon_1" src="{{quiz.image.url}}" alt="">
                             </div>
-                            <h3 class=" fw-bold ">HTML</h3>
-                            <h5>30 ta savol 30 min</h5>
+                            <h3 class=" fw-bold ">{{quiz.title}}</h3>
+                            <h5>{{quiz.question_count}} ta savol {{quiz.times_taken}} min</h5>
                         </div>
                     </a>
+                    {% endfor %}
 
-                    <a href="./quiz.html" class="card card__1">
-                        <div class="card-body p-0 d-inline-flex flex-column align-items-center gap-2">
-                            <div class="html_icon">
-                                <img class="html_icon_1" src="{% static 'assets/images/css3-original-wordmark.png' %}" alt="">
-                            </div>
-                            <h3 class=" fw-bold ">CSS</h3>
-                            <h5>30 ta savol 30 min</h5>
-                        </div>
-                    </a>
-
-                    <a href="./quiz.html" class="card card__1">
-                        <div class="card-body p-0 d-inline-flex flex-column align-items-center gap-2">
-                            <div class="html_icon">
-                                <img class="html_icon_1" src="{% static 'assets/images/javascript-original.png' %}" alt="">
-                            </div>
-                            <h3 class=" fw-bold ">Javascript</h3>
-                            <h5>30 ta savol 30 min</h5>
-                        </div>
-                    </a>
-
-                    <a href="./quiz.html" class="card card__1">
-                        <div class="card-body p-0 d-inline-flex flex-column align-items-center gap-2">
-                            <div class="html_icon">
-                                <img class="html_icon_1" src="{% static 'assets/images/python-original-wordmark.png' %}" alt="">
-                            </div>
-                            <h3 class=" fw-bold ">Paython</h3>
-                            <h5>30 ta savol 30 min</h5>
-                        </div>
-                    </a>
                 </div>
             </div>
 
