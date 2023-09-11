@@ -44,14 +44,14 @@ class Profile(TemplateView):
         context = super().get_context_data(**kwargs)
 
         # sort for quiz
-        quiz_query = Quiz.objects.all().exclude(slug='special-questions')        
-        quiz_list = [quiz for quiz in quiz_query]       
-        question_quiz_count = [item.question_count for item in quiz_query]       
+        quiz_query = Quiz.objects.all().exclude(slug='special-questions')
+        quiz_list = [quiz for quiz in quiz_query]
+        question_quiz_count = [item.question_count for item in quiz_query]
         context['quiz_count'] = len(quiz_list)
         context['question_quiz_count'] = sum(question_quiz_count)
 
         # aort for corectly answers
-        special_quiz=Quiz.objects.get(slug='special-questions')
+        special_quiz = Quiz.objects.get(slug='special-questions')
         corectly = CorrectAnswer.objects.filter(
             user=self.request.user).exclude(quiz=special_quiz)
         corectly_list = [corect for corect in corectly]
@@ -168,6 +168,8 @@ class StartQuestion(View):
                 self.request.session.save()
 
         quiz = Quiz.objects.get(slug=slug)
+        if quiz.question_count == 0:
+            return redirect('/')
         if order == quiz.question_count:
             return redirect('quiz:result', slug)
 
