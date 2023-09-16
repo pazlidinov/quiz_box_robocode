@@ -100,8 +100,7 @@ class AddLeadUser(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         self.request.session['lead_user_phonenumber'] = self.request.POST.get(
-            'phone')
-        # self.request.session['answer'] = 0
+            'phone')        
         messages.success(self.request, "The task was created successfully.")
         return super(AddLeadUser, self).form_valid(form)
 
@@ -185,7 +184,7 @@ class StartQuestion(View):
 
 
 class Result(TemplateView):
-    template_name = 'quiz _result.html'
+    template_name = 'overall_ratings.html'
 
     def get_context_data(self, slug, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -212,13 +211,13 @@ class Result(TemplateView):
             result = round(
                 (self.request.session['answer']/quiz.question_count)*100)
             context["result"] = result
-        finally:
-            del self.request.session['answer']
+        finally:            
             return context
 
 
 def check_phone_number(request):
     data = json.loads(request.GET.get("data"))
+  
     if data:
         lead_user = LeadUser.objects.filter(
             phone=int(data.get("phone_number")))
@@ -231,10 +230,10 @@ def check_phone_number(request):
     return HttpResponse({"status": 200})
 
 
-def user_actived(request):
-    user = LeadUser.objects.get(phone=request.session['lead_user_phonenumber'])
-    user.user_active()
-    print('ok')
+def user_actived(request):   
+    user = LeadUser.objects.filter(phone=request.session['lead_user_phonenumber'])   
+    user.user_active()  
+    del request.session['answer']
     return HttpResponse({"status": 200})
 
 

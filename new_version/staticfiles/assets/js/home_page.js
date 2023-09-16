@@ -32,7 +32,7 @@ function PhoneNumber() {
     let user_input = document.getElementsByName('phone')[0];
     let user_phone_number = user_input.value.trim();
     let num = /^[0-9]+$/;
-
+    console.log('ok')
     for (let i = 0; i < user_phone_number.length; i++) {
         if (!(user_phone_number[i].match(num)) || user_phone_number.length != 9) {
             user_input.style.borderColor = 'red';

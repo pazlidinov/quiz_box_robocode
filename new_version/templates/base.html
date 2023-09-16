@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  
+
     <div class="modal fade login-modal sign-up-modal" id="exampleModal1" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -37,7 +37,7 @@
                     <label>Telefon* 998</label>
                     <span name="is_checked"></span>
                     <input type="number" name="phone" placeholder="XX1234567" onkeyup="PhoneNumber()">
-                   
+
                     <label>Yosh*</label>
                     <input type="number" min="9" max="30" name="age" placeholder="9-30" onkeyup="Age()">
                     <label>Qiziqishlar*</label>
@@ -50,16 +50,14 @@
                         <option value="3d">3D modellashtirish</option>
                     </select>
                     <label>Manzilingiz</label>
-                    <input type="text" name="location" placeholder="Andijon shahar" onkeyup="User_Location()">
-                    <a href="" data-bs-toggle="modal" name="form_send" data-bs-target="#exampleModal1">
-                        <button type="submit" 
-                        class="btn  btn-primary mx-2">Bepul sinov darsiga yozilish<button >
-                    </a>
+                    <input type="text" name="location" placeholder="Andijon shahar" onkeyup="User_Location()">                   
+                    <button type="submit" data-bs-toggle="modal" name="form_send" data-bs-target="#exampleModal1"
+                        class="btn btn-primary">Bepul sinov darsiga yozilish</button>
                 </form>
             </div>
         </div>
     </div>
-<a href="{% url 'quiz:ratings' %}">overall-results</a>
+    
     {% block content%}
     {% endblock %}
     <footer class="mt-4">

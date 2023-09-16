@@ -1,12 +1,22 @@
+.indicator-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 4%;
+}
+
+.ratings-btn_wrapper {
+  padding: 0;
+}
+
 .indicator-card {
     max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 48.5%;
     margin-top: 30px;
     border-radius: 18px;
     background: #FFF;
     box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 57px 24px 60px 41px;
+    padding: 5% 24px 5% 41px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,4 +66,10 @@
         font-weight: 500;
         line-height: 50px;
       }
+  }
+
+  @media screen and (max-width:900px) {
+    .indicator-card {
+      width: 100%;
+    }
   }

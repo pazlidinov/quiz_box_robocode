@@ -34,6 +34,6 @@ urlpatterns = [
     
     
     
-#    overall rating urls
-     path('ratings/', views.Ratings.as_view(), name='ratings')
+# #    overall rating urls
+#      path('ratings/', views.Ratings.as_view(), name='ratings')
 ]
