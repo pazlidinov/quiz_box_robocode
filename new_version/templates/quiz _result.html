@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="quiz-wrapper">
+        <div class="quiz-info_wrapper">
+            <div class="mt-5 content">
+                <h2>Tugadi !</h2>
+                <p>Sizga {{quiz.title}} savollarga <span class="text-warning">{{result}}% </span>mos keladi.</p>
+            </div>
+            <div class="content2">
+                <p class="mt-4">
+                    <span class="text-bold">Front End</span> – bu turli xil web-saytlar, web-ilovalarning bizga
+                    ko’rinib
+                    turgan qismi hisoblanadi. Siz ko’rgan barcha saytlardagi turli xil animatsiyalar, tugmalar,
+                    matnlar,
+                    rasmlar va boshqa barcha bizga ko’rinib turgan qismi Front Endga kiradi.
+                </p>
+                <p class="mt-4">
+                    <span class="text-bold">Front End dasturchi</span> – bu o’sha saytni Front End qismini
+                    yaratuvchi
+                    dasturchi hisoblanadi.
+                </p>
+                <p class="mt-4">
+                    <span class="text-bold">ROBOCODE IT ACADEMY</span> sizga ushbu kasbni egalishingizda o’z
+                    kurslarini va
+                    malakali dasturchilarini taklif etadi!
+                </p>
+
+            </div>
+            {% if request.user.is_authenticated %}
+            <a href="/"><button class="button-light mb-4  mt-4">Accountga qaytish</button></a>
+            {% else %}
+            <button onclick="user_actived()" class="button-light mb-4  mt-4" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Bepul
+                sinov
+                darsiga
+                yozilish</button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="modal fade login-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <button class="cross" data-bs-dismiss="modal" aria-label="Close"><img
+                        src="{% static 'assets/icons/cross.svg' %}" alt=""></button>
+                <h4 class="text-center">Qabul qilindi !</h4>
+                <p class="text-center">Tez orada siz bilan ko’rsatilgan raqam orqali bog’lanishadi.
+                    Agar uzrli sabablarga ko’ra siz bilan bog’lanishmasa <a href="">mana bu</a> manzilga telegram
+                    orqali
+                    yozing.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function user_actived() {
+        let url = '/user_actived/'
+        fetch(url).then(
+            console.log('ok')
+        ).catch(error => (console.error(error)));
+    }
+</script>
+{% endblock content %}

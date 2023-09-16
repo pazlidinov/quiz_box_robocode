@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'assets/css/home_page.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/aos/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/quiz.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/access_phonenumber.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/quiz_result.css' %}">
+
+    <title>Home Page</title>
+
+</head>
+
+<body>
+  
+    <div class="modal fade login-modal sign-up-modal" id="exampleModal1" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-0">
+                <button class="cross" data-bs-dismiss="modal" aria-label="Close"><img
+                        src="{% static 'assets/icons/cross.svg' %}" alt=""></button>
+                <h1>Bepul sinov darsga yozilish uchun avval quyidagi formani to'ldiring.</h1>
+                <p>Ma'lumotlaringiz 3-shaxslar qo'liga tushmasligi ta'minlanadi.</p>
+                <form action="{% url 'quiz:add_lead_user' %}" method="post">
+                    {% csrf_token %}
+                    <label>Ism va Familya</label>
+                    <input type="text" name="full_name" onkeyup="FullName()" placeholder="Ism va Familya">
+                    <label>Telefon* 998</label>
+                    <span name="is_checked"></span>
+                    <input type="number" name="phone" placeholder="XX1234567" onkeyup="PhoneNumber()">
+                   
+                    <label>Yosh*</label>
+                    <input type="number" min="9" max="30" name="age" placeholder="9-30" onkeyup="Age()">
+                    <label>Qiziqishlar*</label>
+                    <select name="interest" class="form-select mb-3 p-3" aria-label="Default select example" value="1">
+                        <option selected value="frontend">Web dasturlash Front-End</option>
+                        <option value="backend">Web dasturlash Back-End</option>
+                        <option value="mobil dasturlash">Mobil dasturlash</option>
+                        <option value="robototexnika">Robototexnika</option>
+                        <option value="grafik dizayn">Grafik Dizayn</option>
+                        <option value="3d">3D modellashtirish</option>
+                    </select>
+                    <label>Manzilingiz</label>
+                    <input type="text" name="location" placeholder="Andijon shahar" onkeyup="User_Location()">
+                    <a href="" data-bs-toggle="modal" name="form_send" data-bs-target="#exampleModal1">
+                        <button type="submit" 
+                        class="btn  btn-primary mx-2">Bepul sinov darsiga yozilish<button >
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+<a href="{% url 'quiz:ratings' %}">overall-results</a>
+    {% block content%}
+    {% endblock %}
+    <footer class="mt-4">
+        <div class="container">
+            <span class="py-2">Supported by <a href="https://robocode.uz">robocode.uz</a></span>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+    <script src="{% static 'assets/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src="{% static 'assets/js/home_page.js' %}"></script>
+
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

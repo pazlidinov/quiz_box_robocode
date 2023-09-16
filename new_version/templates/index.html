@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="banner">
+    <div class="container">
+        <div class="banner-content flex-box d-flex justify-content-between" data-aos="fade-down">
+            <div class="text-wrapper">
+                <h1>Qaysi IT kasbi sizga mos <br> kelishini bilib oling.</h1>
+
+                <p class="mt-2">IT ga qiziqasiz lekin qaysi yo’nalishi sizga mos kelishini bilmayapsizmi ? <br>
+                    15 daqiqa vaqtingizni sarflab IT da qaysi kasb siz uchun mos kelishini <br> bilib oling</p>
+
+                {% if request.user.is_authenticated %}
+                <a href=""><button class="button-dark mx-2">Kasb
+                        tanlash</button></a>
+
+                {% else %}
+                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    <button class="button-light mx-2"  >Bilib olish</button>
+                </a>
+                {% endif %}
+            </div>
+            <div class="img-wrapper">
+                <img src="{% static 'assets/images/Work-Essentials 1.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="banner">
+    <div class="container">
+        <div class="banner-content flex-box d-flex justify-content-between" data-aos="fade-up">
+            <div class="text-wrapper">
+                <h1>Robocode IT Academy talabasi uchun</h1>
+
+                <p class="mt-2">Ichki nazorat imtihonlari , orqaliq imtihoni va modul testlarni ishlash uchun
+                    berilgan bir martalik paroldan foydalanib kirish va test topshirish imkoni mavjud.</p>
+
+                <button class="button-light mt-2 second-banner-btn" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Kirish</button>
+            </div>
+
+            <div class="img-wrapper">
+                <img src="{% static 'assets/images/Team 1.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Login Modal -->
+
+<div class="modal fade login-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button class="cross" data-bs-dismiss="modal" aria-label="Close"><img src="assets/icons/cross.svg"
+                    alt=""></button>
+
+            <h1>ROBOCODE IT ACADEMY <br>
+                o'quvchilari bo'limiga o'tish</h1>
+
+            <p>Administratsiya tomonidan berilgan login <br> hamda paroldan foydalaning.</p>
+
+            <form action="{% url 'quiz:login' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Login">
+                <input type="password" name="password" placeholder="Parol">
+                <button type="submit" class="button-light sign-in-btn">
+                    Kirish
+                </button>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
