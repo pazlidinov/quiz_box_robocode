@@ -1,4 +1,5 @@
 import json
+from random import randint
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
@@ -100,7 +101,7 @@ class AddLeadUser(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         self.request.session['lead_user_phonenumber'] = self.request.POST.get(
-            'phone')        
+            'phone')
         messages.success(self.request, "The task was created successfully.")
         return super(AddLeadUser, self).form_valid(form)
 
@@ -211,13 +212,17 @@ class Result(TemplateView):
             result = round(
                 (self.request.session['answer']/quiz.question_count)*100)
             context["result"] = result
-        finally:            
+        finally:
+            context["frontend"] = randint(50, 100)
+            context["backend"] = randint(40, 90)
+            context["robotexnika"] = randint(20, 30)
+            context["smm"] = randint(10, 30)
             return context
 
 
 def check_phone_number(request):
     data = json.loads(request.GET.get("data"))
-  
+
     if data:
         lead_user = LeadUser.objects.filter(
             phone=int(data.get("phone_number")))
@@ -230,12 +235,12 @@ def check_phone_number(request):
     return HttpResponse({"status": 200})
 
 
-def user_actived(request):   
-    user = LeadUser.objects.filter(phone=request.session['lead_user_phonenumber'])   
-    user.user_active()  
+def user_actived(request):
+    user = LeadUser.objects.filter(
+        phone=request.session['lead_user_phonenumber'])
+    user.user_active()
     del request.session['answer']
     return HttpResponse({"status": 200})
-
 
 
 class Ratings(TemplateView):

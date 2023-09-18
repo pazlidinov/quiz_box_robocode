@@ -28,7 +28,7 @@
             <div class="modal-content p-0">
                 <button class="cross" data-bs-dismiss="modal" aria-label="Close"><img
                         src="{% static 'assets/icons/cross.svg' %}" alt=""></button>
-                <h1>Bepul sinov darsga yozilish uchun avval quyidagi formani to'ldiring.</h1>
+                <h1>Bepul testdan o'tish uchun avval quyidagi formani to'ldiring.</h1>
                 <p>Ma'lumotlaringiz 3-shaxslar qo'liga tushmasligi ta'minlanadi.</p>
                 <form action="{% url 'quiz:add_lead_user' %}" method="post">
                     {% csrf_token %}

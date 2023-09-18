@@ -16,7 +16,7 @@ def make_access_password(number, password):
     data_json = json.dumps(data)
     r = requests.post('https://api.xssh.uz/smsv1/?data=' + data_json)
     status = r.text.split(',')[-1].split(':')[-1][:-1]
-    
+   
     if status == "200":
         return True
     else:
