@@ -71,7 +71,7 @@ class Quiz(models.Model):
 
 
 class Question(models.Model):
-    label = QuillField()
+    label = models.CharField(max_length=150)
     order = models.PositiveIntegerField(blank=True, null=True)
     point = models.FloatField(default=3.3)
     image = models.ImageField(
@@ -87,7 +87,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    text = models.TextField(max_length=150)
+    text = models.CharField(max_length=150)
     is_correct = models.BooleanField(default=False)
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='answers')
@@ -101,7 +101,7 @@ class CorrectAnswer(models.Model):
         LeadUser, on_delete=models.CASCADE, related_name='lead_answers', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='user_answers', blank=True, null=True)
-    quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT,
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE,
                              related_name='correct_quiz', blank=True, null=True)
     correctly_answer = models.PositiveIntegerField(
         default=0, blank=True, null=True)
@@ -116,4 +116,3 @@ class CorrectAnswer(models.Model):
 
     def __str__(self):
         return str(self.author)
-models.ManyToManyField

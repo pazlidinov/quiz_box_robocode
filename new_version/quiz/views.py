@@ -125,7 +125,7 @@ class AccessPhonenumber(TemplateView):
         user = LeadUser.objects.get(
             phone=self.request.session['lead_user_phonenumber'])
         if str(user.password) == request.POST.get('access_code'):
-            return redirect('/start_question/special-questions/0/')
+            return redirect('/start_question/it-da-siz-kimsiz/1/')
         else:
             return redirect('/access_phonenumber/')
 
@@ -160,7 +160,9 @@ def answer_in_session(request, order):
 class StartQuestion(View):
 
     def get(self, request, slug, order, *args, **kwargs):
+        
         if request.GET.get('answer'):
+
             send_answer = Answer.objects.get(id=request.GET.get('answer'))
             if send_answer.is_correct:
                 answer_in_session(self.request, order)
@@ -213,10 +215,35 @@ class Result(TemplateView):
                 (self.request.session['answer']/quiz.question_count)*100)
             context["result"] = result
         finally:
-            context["frontend"] = randint(50, 100)
-            context["backend"] = randint(40, 90)
-            context["robotexnika"] = randint(20, 30)
-            context["smm"] = randint(10, 30)
+            ratings = [
+                 {
+                    'rating':randint(10, 30),
+                    'text':'Marketing,ijtimoiy tarmoqlardan foydalana olish.',
+                    'stack':'SMM mutahassisi'
+                    },
+                    {
+                    'rating':randint(40, 88),
+                    'text':'Algoritmlar,muammolarga yechim topish,intizom.',
+                    'stack':'Back-End'
+                    },
+                    {
+                    'rating':randint(50, 92),
+                    'text':'Kreativlik,ilg\'or go\'yalar,noodatiy yondashuv.',
+                    'stack':'Front-End'
+                    },
+                    {
+                    'rating':randint(20, 35),
+                    'text':'Injenerlik,ixtirolar qilish,texnik bilimlar.',
+                    'stack':'Robototexnika'
+                    },
+                    {
+                    'rating':randint(50, 80),
+                    'text':'Ijodkorlik,go\'zallik yaratish, qulaylik.',
+                    'stack':'Grafik dizayn'
+                    },
+                ]
+            sorted_rating = [x for x in sorted(ratings,key=lambda i:i.get("rating") ,reverse=True,)]
+            context["ratings"] = sorted_rating
             return context
 
 

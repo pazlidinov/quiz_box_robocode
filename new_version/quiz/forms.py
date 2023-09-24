@@ -5,4 +5,4 @@ from .models import LeadUser
 class LeadUserForm(forms.ModelForm):
     class Meta:
         model = LeadUser
-        fields = ['full_name', 'phone', 'age', 'interest', 'location']
+        fields = ['full_name', 'phone', 'age', 'location']

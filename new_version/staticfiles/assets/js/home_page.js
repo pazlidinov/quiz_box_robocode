@@ -31,10 +31,38 @@ function FullName() {
 function PhoneNumber() {
     let user_input = document.getElementsByName('phone')[0];
     let user_phone_number = user_input.value.trim();
-    let num = /^[0-9]+$/;
-    console.log('ok')
+    let num = /^[0-9+()]+$/;
+    user_phone_number = user_phone_number.replaceAll('(', '')
+    user_phone_number = user_phone_number.replaceAll(')', '')
+    user_phone_number = user_phone_number.replaceAll('-', '')
+    user_phone_number = user_phone_number.replaceAll('+', '')
+    
+    control = '+'
+    
+    for (let index = 0; index < user_phone_number.length; index++) {        
+        if (index==3){
+            control +='('+user_phone_number[index]
+        } 
+        else if (index==5 ){
+            control +=')'+user_phone_number[index]
+        }    
+        else if (index==8 ){
+            control +='-'+user_phone_number[index]
+        }    
+        else if (index==10 ){
+            control +='-'+user_phone_number[index]
+        }  
+        else{
+            control +=user_phone_number[index]
+        }
+        
+    }
+    
+    user_input.value = control;
+    user_phone_number=user_phone_number.slice(3)
+   
     for (let i = 0; i < user_phone_number.length; i++) {
-        if (!(user_phone_number[i].match(num)) || user_phone_number.length != 9) {
+        if (!(user_phone_number[i].match(num)) || user_phone_number.length != 15) {
             user_input.style.borderColor = 'red';
             phone_number_completed = false;
             break;
@@ -65,6 +93,10 @@ function PhoneNumber() {
             phone_number_completed = false;
         }
     }).catch(error => (console.log(error)));
+
+
+
+
 }
 
 function Age() {

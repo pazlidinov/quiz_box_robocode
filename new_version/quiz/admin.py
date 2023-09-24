@@ -9,6 +9,14 @@ class LeadUserAdmin(admin.ModelAdmin):
                     'location', 'interest', 'phone', 'active']
 
 
+# class QuestionStackedInline(admin.StackedInline):
+#     model = Question
+#     extra = 10
+
+class AnswerTabularInline(admin.StackedInline):
+    model = Answer
+    extra = 4
+
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'slug', 'created_at', 'times_taken']
@@ -18,6 +26,7 @@ class QuizAdmin(admin.ModelAdmin):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display =['id','label','order','quiz']
+    inlines = [AnswerTabularInline]
 
 
 @admin.register(Answer)

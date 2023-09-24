@@ -3,78 +3,236 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'assets/css/home_page.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/aos/aos.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/quiz.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/access_phonenumber.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/quiz_result.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static 'assets/css/home_page.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/aos/aos.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/quiz.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}" />
+  <link rel="shortcut icon" href="https://robocode.uz/static/images/custom/favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'assets/css/access_phonenumber.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/quiz_result.css' %}" />
 
-    <title>Home Page</title>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robocode.uz/">
+  <meta property="og:title" content="Robocode IT Academy Andijan - Andijondagi birinchi zamonaviy kasblar akademiyasi.">
+  <meta property="og:description"
+    content="Andijondagi Robototexnika , Dasturlash ,Veb dasturlash, Mobil dastutlash, Grafik dizayn, Video montaj va Kompyuter bilimlari bo'yicha o'quv kurslari!">
+  <meta property="og:image" content="https://robocode.uz/static/images/mainpage/header/robocode.png">
+  <meta name="description"
+    content="Robocode IT Academy Andijan - Andijondagi Robototexnika va Dasturlash , Grafik dizayn, Video montaj bo'yicha o'quv kurslari">
+  <meta name="keywords"
+    content="Robocode, Andijan, Robototexnika, dasturlash, andijon, lego, Arduino, Python, Javascript, Vue.js, Django, PostgreSQL, HTML, CSS, bootstrap, Andijon, Vodiy, IT sohasi, dasturlash kurslari, ">
 
+
+  <title>IT'da kim ekaningizni bilib oling !</title>
+  <style>
+    button:disabled {
+      opacity: 0.6;
+      cursor: pointer;
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .area {
+      background: #4e54c8;
+      background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      z-index: -9999;
+    }
+
+    .circles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .circles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      animation: animate 25s linear infinite;
+      bottom: -150px;
+    }
+
+    .circles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .circles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .circles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .circles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .circles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .circles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .circles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .circles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .circles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .circles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+    
+  </style>
 </head>
 
 <body>
+  <div class="area">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <div class="modal fade login-modal sign-up-modal" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-0">
+        <button class="cross" data-bs-dismiss="modal" aria-label="Close">
+          <img src="{% static 'assets/icons/cross.svg' %}" alt="" />
+        </button>
+        <h1>Bepul testdan o'tish uchun avval quyidagi formani to'ldiring.</h1>
+        <p>Ma'lumotlaringiz 3-shaxslar qo'liga tushmasligi ta'minlanadi.</p>
+        <form action="{% url 'quiz:add_lead_user' %}" method="post" onsubmit="process(event)">
 
-    <div class="modal fade login-modal sign-up-modal" id="exampleModal1" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-0">
-                <button class="cross" data-bs-dismiss="modal" aria-label="Close"><img
-                        src="{% static 'assets/icons/cross.svg' %}" alt=""></button>
-                <h1>Bepul testdan o'tish uchun avval quyidagi formani to'ldiring.</h1>
-                <p>Ma'lumotlaringiz 3-shaxslar qo'liga tushmasligi ta'minlanadi.</p>
-                <form action="{% url 'quiz:add_lead_user' %}" method="post">
-                    {% csrf_token %}
-                    <label>Ism va Familya</label>
-                    <input type="text" name="full_name" onkeyup="FullName()" placeholder="Ism va Familya">
-                    <label>Telefon* 998</label>
-                    <span name="is_checked"></span>
-                    <input type="number" name="phone" placeholder="XX1234567" onkeyup="PhoneNumber()">
+          {% csrf_token %}
 
-                    <label>Yosh*</label>
-                    <input type="number" min="9" max="30" name="age" placeholder="9-30" onkeyup="Age()">
-                    <label>Qiziqishlar*</label>
-                    <select name="interest" class="form-select mb-3 p-3" aria-label="Default select example" value="1">
-                        <option selected value="frontend">Web dasturlash Front-End</option>
-                        <option value="backend">Web dasturlash Back-End</option>
-                        <option value="mobil dasturlash">Mobil dasturlash</option>
-                        <option value="robototexnika">Robototexnika</option>
-                        <option value="grafik dizayn">Grafik Dizayn</option>
-                        <option value="3d">3D modellashtirish</option>
-                    </select>
-                    <label>Manzilingiz</label>
-                    <input type="text" name="location" placeholder="Andijon shahar" onkeyup="User_Location()">                   
-                    <button type="submit" data-bs-toggle="modal" name="form_send" data-bs-target="#exampleModal1"
-                        class="btn btn-primary">Bepul sinov darsiga yozilish</button>
-                </form>
-            </div>
-        </div>
+
+          <label>Ism va Familya</label>
+          <input type="text" name="full_name" onkeyup="FullName()" placeholder="Ism va Familya" />
+          <label>Telefon*</label>
+          <span name="is_checked"></span>
+          
+          <input  type="text" name="phone" value="+998(" placeholder="+998 (90) 123-45-67" onkeyup="PhoneNumber()" />
+
+          <label>Yosh*</label>
+          <input type="number" min="9" max="30" name="age" placeholder="9-30" onkeyup="Age()" />
+
+          <label>Manzilingiz</label>
+          <input type="text" name="location" placeholder="Andijon shahar" onkeyup="User_Location()" />
+
+          
+          
+
+
+          <button type="submit" data-bs-toggle="modal" name="form_send" data-bs-target="#exampleModal1"
+            class="btn btn-primary">
+            Bepul testdan o'tish
+          </button>
+        </form>
+      </div>
     </div>
-    
-    {% block content%}
-    {% endblock %}
-    <footer class="mt-4">
-        <div class="container">
-            <span class="py-2">Supported by <a href="https://robocode.uz">robocode.uz</a></span>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
-    <script src="{% static 'assets/aos/aos.js' %}"></script>
-    <script src="{% static 'assets/js/script.js' %}"></script>
-    <script src="{% static 'assets/js/home_page.js' %}"></script>
+  </div>
+  <main class="main">{% block content%} {% endblock %}</main>
 
-    <script>
-        AOS.init();
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'assets/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/js/script.js' %}"></script>
+  <script src="{% static 'assets/js/home_page.js' %}"></script>
+
+  <script>
+    AOS.init();
+  </script>
+  
 </body>
 
 </html>
